@@ -1,0 +1,17 @@
+*{
+  color: white;
+}
+
+a{
+  text-decoration: none;
+}
+
+li{
+  padding-right: 30px;
+}
+
+.header-wrapper{
+  background-color: rgb(211, 82, 82);
+}
+
+

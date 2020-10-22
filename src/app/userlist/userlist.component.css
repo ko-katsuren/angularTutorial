@@ -1,0 +1,18 @@
+.search {
+  width: 100%;
+  display: inline-block;
+}
+
+.search button {
+  float: right;
+}
+
+.userlist {
+  height: 500px;
+  border: solid rgb(211, 82, 82) 1px;
+  overflow: scroll;
+}
+
+.add {
+  margin: 10px;
+}

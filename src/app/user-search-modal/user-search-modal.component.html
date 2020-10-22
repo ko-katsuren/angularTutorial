@@ -1,0 +1,27 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">絞り込み</h1>
+  </header>
+  <div class="input-form">
+    <form [formGroup]="form">
+      <table>
+        <tr>
+          <th>ID</th>
+          <td><input type="text" formControlName="id"></td>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <td><input type="text" formControlName="name"></td>
+        </tr>
+        <tr>
+          <th>所属</th>
+          <td><input type="text" formControlName="belong"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <footer id="modal-footer">
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="search()">絞り込み</button>
+  </footer>
+</div>

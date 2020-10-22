@@ -1,0 +1,18 @@
+.login-wrap {
+  width: 100%;
+  height: 1000px;
+  text-align: center;
+}
+
+.login {
+  display: inline-block;
+  margin-top: 200px;
+}
+
+.login-form {
+  display: inline-block;
+}
+
+.btn {
+  float: right;
+}
