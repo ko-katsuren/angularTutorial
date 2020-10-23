@@ -1,0 +1,35 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">新規追加</h1>
+  </header>
+  <div class="input-form">
+    <form [formGroup]="form">
+      <table>
+        <tr>
+          <th>メール</th>
+          <td><input type="text" formControlName="email"></td>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <td><input type="text" formControlName="name"></td>
+        </tr>
+        <tr>
+          <th>所属</th>
+          <td><input type="text" formControlName="belong"></td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+          <td><input type="numver" formControlName="age"></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><input type="text" formControlName="address"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <footer id="modal-footer">
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="search()">新規追加</button>
+  </footer>
+</div>

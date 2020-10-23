@@ -1,17 +1,15 @@
-*{
+* {
   color: white;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-li{
+li {
   padding-right: 30px;
 }
 
-.header-wrapper{
+.header-wrapper {
   background-color: rgb(211, 82, 82);
 }
-
-

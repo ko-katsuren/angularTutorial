@@ -1,0 +1,33 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">詳細</h1>
+  </header>
+  <div class="detail">
+    <table>
+      <tr>
+        <th>ID</th>
+        <td>{{ detailInfo.id }}</td>
+      </tr>
+      <tr>
+        <th>名前</th>
+        <td>{{ detailInfo.name }}</td>
+      </tr>
+      <tr>
+        <th>所属</th>
+        <td>{{ detailInfo.belong }}</td>
+      </tr>
+      <tr>
+        <th>年齢</th>
+        <td>{{ detailInfo.age }}</td>
+      </tr>
+      <tr>
+        <th>住職</th>
+        <td>{{ detailInfo.address }}</td>
+      </tr>
+    </table>
+  </div>
+  <footer id="modal-footer">
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="search()">編集</button>
+  </footer>
+</div>

@@ -11,8 +11,10 @@ import { MatterlistComponent } from './matterlist/matterlist.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { UserSearchModalComponent } from './user-search-modal/user-search-modal.component';
+import { UserSearchModalComponent } from './modals/user-search-modal/user-search-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserDetailModalComponent } from './modals/user-detail-modal/user-detail-modal.component';
+import { UserAddModalComponent } from './modals/user-add-modal/user-add-modal.component';
 // import { AlertDialogComponent }  from './alert-dialog.component';
 
 @NgModule({
@@ -23,7 +25,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SelectComponent,
     UserlistComponent,
     MatterlistComponent,
-    UserSearchModalComponent
+    UserSearchModalComponent,
+    UserDetailModalComponent,
+    UserAddModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +36,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

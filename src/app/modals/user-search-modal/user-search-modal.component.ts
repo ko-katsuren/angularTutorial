@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { inject } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';  // 追加
-import { UsersearchService } from '../usersearch.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserListService } from '../../services/userList/user-list.service';
 
 @Component({
   selector: 'app-user-search-modal',
   templateUrl: './user-search-modal.component.html',
-  styleUrls: ['./user-search-modal.component.css']
+  styleUrls: ['./user-search-modal.component.css'],
 })
-
 export class UserSearchModalComponent implements OnInit {
-
   form = this.fb.group({
     id: [''],
     name: [''],
     belong: [''],
   });
 
-  constructor(public _dialogRef: MatDialogRef<UserSearchModalComponent>,
-     private fb:FormBuilder) {
-    }
+  constructor(
+    public _dialogRef: MatDialogRef<UserSearchModalComponent>,
+    private fb: FormBuilder,
+    userListService: UserListService
+  ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-
-    })
+    this.form = this.fb.group({});
   }
 
-  search(){
-
+  search() {
     this.closeModal();
   }
 
   actionFunction() {
-    alert("You have logged out.");
     this.closeModal();
   }
 
