@@ -1,0 +1,23 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">新規追加</h1>
+  </header>
+  <div class="input-form">
+    <form [formGroup]="form">
+      <table>
+        <tr>
+          <th>名前</th>
+          <td><input type="text" formControlName="name"></td>
+        </tr>
+        <tr>
+          <th>金額</th>
+          <td><input type="number" formControlName="price"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <footer id="modal-footer">
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="search()">新規追加</button>
+  </footer>
+</div>

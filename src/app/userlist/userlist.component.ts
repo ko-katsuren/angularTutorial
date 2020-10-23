@@ -60,7 +60,7 @@ export class UserlistComponent implements OnInit {
     });
   }
 
-  openModal(modalComponent: any): MatDialogRef<UserDetailModalComponent, any> {
+  openModal(modalComponent: any): MatDialogRef<any, any> {
     const dialogConfig = new MatDialogConfig();
 
     // 表示するdialogの設定

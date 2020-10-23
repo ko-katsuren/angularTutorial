@@ -1,0 +1,23 @@
+#modal-content-wrapper {
+  width: 400px;
+  height: 250px;
+  display: grid;
+  color: black;
+}
+
+#modal-title {
+  font-size: 22px;
+}
+
+#modal-footer {
+  justify-self: right;
+  align-self: center;
+}
+
+input {
+  width: 300px;
+}
+
+.btn {
+  margin: 10px;
+}

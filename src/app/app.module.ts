@@ -15,7 +15,10 @@ import { UserSearchModalComponent } from './modals/user-search-modal/user-search
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDetailModalComponent } from './modals/user-detail-modal/user-detail-modal.component';
 import { UserAddModalComponent } from './modals/user-add-modal/user-add-modal.component';
+import { MatterSearchModalComponent } from './modals/matter-search-modal/matter-search-modal.component';
+import { MatterAddModalComponent } from './modals/matter-add-modal/matter-add-modal.component';
 // import { AlertDialogComponent }  from './alert-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { UserAddModalComponent } from './modals/user-add-modal/user-add-modal.co
     UserSearchModalComponent,
     UserDetailModalComponent,
     UserAddModalComponent,
+    MatterSearchModalComponent,
+    MatterAddModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { UserAddModalComponent } from './modals/user-add-modal/user-add-modal.co
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

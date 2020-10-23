@@ -4,7 +4,7 @@
     <h2>案件情報</h2>
   </div>
   <div class="search">
-    <button type="button" class="btn btn-primary">絞り込み</button>
+    <button type="button" class="btn btn-primary" (click)="openSearchModal()">絞り込み</button>
   </div>
   <div class="userlist">
     <table class="table">
@@ -34,6 +34,6 @@
     </table>
   </div>
   <div class="add">
-    <button type="button" class="btn btn-primary">新規追加</button>
+    <button type="button" class="btn btn-primary" (click)="openAddModal()">新規追加</button>
   </div>
 </div>
