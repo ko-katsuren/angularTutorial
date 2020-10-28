@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UserInfo } from '../../models/userInfo';
 import { Observable, of } from 'rxjs/index';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { URLSearchParams } from 'url';
+import { TranslationWidth } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -8,62 +11,129 @@ import { Observable, of } from 'rxjs/index';
 export class UserListService {
   // laravelとのやりとり実装するまではデータで作っておく
   usersInfo = [];
+  searchCondition = {
+    id: '',
+    name: '',
+    belong: '',
+  };
+  addInfo: UserInfo;
   detailInfo: UserInfo;
+  editInfo: UserInfo;
 
-  constructor() {
-    this.clear();
+  private apiUrl = 'http://localhost:8000/api/userinfo';
+  private httpOptions: any = {
+    // ヘッダ情報
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+    // DELETE 実行時に `body` が必要になるケースがあるのでプロパティとして用意しておく
+    // ( ここで用意しなくても追加できるけど... )
+    body: null,
+  };
+
+  constructor(private httpClient: HttpClient) {
+    this.setAuthorization('my-auth-token');
   }
 
-  getAll(): Observable<UserInfo[]> {
-    return of(this.usersInfo);
+  public getAll(): Observable<any> {
+    return this.httpClient.get(this.apiUrl, this.httpOptions);
   }
 
-  search(): void {}
+  public getSearchResult(): Observable<any> {
+    return this.httpClient.get(this.apiUrl + '/params', {
+      params: {
+        id: this.searchCondition.id,
+        name: this.searchCondition.name,
+        belong: this.searchCondition.belong,
+      },
+    });
+  }
 
-  add(): void {}
+  public setAuthorization(token: string = null): void {
+    if (!token) {
+      return;
+    }
+    const bearerToken: string = `Bearer ${token}`;
+    this.httpOptions.headers = this.httpOptions.headers.set(
+      'Authorization',
+      bearerToken
+    );
+  }
+
+  add(): void {
+    const body = {
+      email: this.addInfo.email,
+      password: this.addInfo.password,
+      name: this.addInfo.name,
+      belong: this.addInfo.belong,
+      age: this.addInfo.age,
+      address: this.addInfo.address,
+    };
+
+    this.httpClient
+      .post(this.apiUrl, 'body=' + JSON.stringify(body), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      })
+      .subscribe(
+        (res) => {
+          console.log('success: ' + JSON.stringify(res));
+        },
+        (error) => {
+          console.log('error: ' + JSON.stringify(error));
+        }
+      );
+  }
+
+  update(): void {
+    this.httpClient
+      .put(this.apiUrl + '/params', {
+        params: {
+          id: this.editInfo.id,
+          name: this.editInfo.name,
+          belong: this.editInfo.belong,
+          age: this.editInfo.age,
+          address: this.editInfo.address,
+        },
+      })
+      .subscribe(
+        (res) => {
+          console.log('success: ' + JSON.stringify(res));
+        },
+        (error) => {
+          console.log('error: ' + JSON.stringify(error));
+        }
+      );
+  }
 
   clear(): void {
-    this.usersInfo = [
-      new UserInfo(
-        'katsuren1@gmail.com',
-        1,
-        '勝連1',
-        '営業1',
-        28,
-        'コロラド州トラント'
-      ),
-      new UserInfo(
-        'katsuren2@gmail.com',
-        2,
-        '勝連2',
-        '営業2',
-        33,
-        '東京都世田谷区'
-      ),
-      new UserInfo(
-        'katsuren3@gmail.com',
-        3,
-        '勝連3',
-        '営業3',
-        22,
-        '大阪府泉佐野市'
-      ),
-      new UserInfo(
-        'katsuren4@gmail.com',
-        4,
-        '勝連4',
-        '営業4',
-        55,
-        '沖縄市上地'
-      ),
-    ];
+    this.usersInfo = [];
   }
 
-  setDetailInfo(id: number): void {
-    this.detailInfo = this.usersInfo.find((user) => user.id === id);
+  setDetailInfo(info: UserInfo): void {
+    this.detailInfo = info;
   }
 
   getDetailInfo(): Observable<UserInfo> {
     return of(this.detailInfo);
+  }
+
+  setSearchCondition(id, name, belong): void {
+    this.searchCondition.id = id ?? '';
+    this.searchCondition.name = name ?? '';
+    this.searchCondition.belong = belong ?? '';
+  }
+
+  setEditUserInfo(userInfo: UserInfo): void {
+    this.editInfo = userInfo;
+  }
+
+  getEditUserInfo(): UserInfo {
+    return this.editInfo;
+  }
+
+  setAddUserInfo(info: UserInfo) {
+    this.addInfo = info;
   }
 }

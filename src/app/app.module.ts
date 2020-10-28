@@ -19,6 +19,7 @@ import { MatterSearchModalComponent } from './modals/matter-search-modal/matter-
 import { MatterAddModalComponent } from './modals/matter-add-modal/matter-add-modal.component';
 // import { AlertDialogComponent }  from './alert-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserEditModalComponent } from './modals/user-edit-modal/user-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserAddModalComponent,
     MatterSearchModalComponent,
     MatterAddModalComponent,
+    UserEditModalComponent,
   ],
   imports: [
     BrowserModule,

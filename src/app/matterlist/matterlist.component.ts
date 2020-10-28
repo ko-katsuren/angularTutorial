@@ -8,6 +8,7 @@ import { MatterInfo } from '../models/matterInfo';
 import { MatterAddModalComponent } from '../modals/matter-add-modal/matter-add-modal.component';
 import { MatterSearchModalComponent } from '../modals/matter-search-modal/matter-search-modal.component';
 import { MatterListService } from '../services/matterList/matter-list.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-matterlist',
@@ -23,7 +24,22 @@ export class MatterlistComponent implements OnInit {
     private matterListService: MatterListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.matterListService
+      .getAll()
+      .subscribe((mattersInfo: Observable<any>) => {
+        this.matterList = this.makeMatterInfoList(mattersInfo);
+      });
+  }
+
+  private makeMatterInfoList(array: Observable<any>): MatterInfo[] {
+    const result = [];
+    array['matterData'].forEach((data) => {
+      result.push(new MatterInfo(data.id, data.name, data.price));
+    });
+
+    return result;
+  }
 
   openSearchModal() {
     const modalDialog = this.openModal(MatterSearchModalComponent);
@@ -31,6 +47,12 @@ export class MatterlistComponent implements OnInit {
     modalDialog.afterClosed().subscribe((result: any) => {
       // 結果をセット
       this.alertDialogResult = result;
+
+      this.matterListService
+        .getSearchResult()
+        .subscribe((mattersInfo: Observable<any>) => {
+          this.matterList = this.makeMatterInfoList(mattersInfo);
+        });
     });
   }
 
@@ -40,6 +62,11 @@ export class MatterlistComponent implements OnInit {
     modalDialog.afterClosed().subscribe((result: any) => {
       // 結果をセット
       this.alertDialogResult = result;
+      this.matterListService
+        .getAll()
+        .subscribe((mattersInfo: Observable<any>) => {
+          this.matterList = this.makeMatterInfoList(mattersInfo);
+        });
     });
   }
 

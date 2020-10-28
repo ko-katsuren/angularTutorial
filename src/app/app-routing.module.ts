@@ -7,7 +7,7 @@ import { MatterlistComponent } from './matterlist/matterlist.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'select', component: SelectComponent },
   { path: 'userlist', component: UserlistComponent },
   { path: 'matterlist', component: MatterlistComponent },

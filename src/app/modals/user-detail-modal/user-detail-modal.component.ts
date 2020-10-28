@@ -24,16 +24,17 @@ export class UserDetailModalComponent implements OnInit {
     });
   }
 
-  search() {
-    this.closeModal();
+  edit() {
+    this.userListService.setEditUserInfo(this.detailInfo);
+    this.closeModal(true);
   }
 
-  actionFunction() {
-    this.closeModal();
+  close() {
+    this.closeModal(false);
   }
 
   // ダイアログを閉じる
-  closeModal() {
-    this._dialogRef.close();
+  closeModal(clickedEdit: boolean) {
+    this._dialogRef.close(clickedEdit);
   }
 }

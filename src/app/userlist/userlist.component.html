@@ -8,11 +8,13 @@
   </div>
   <div class="userlist">
     <table class="table">
-      <th>ID</th>
-      <th>名前</th>
-      <th>所属</th>
-      <th></th>
-      <tr *ngFor="let user of userList">
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>所属</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let user of (userList || [])">
         <td>{{user.id}}</td>
         <td>{{user.name}}</td>
         <td>{{user.belong}}</td>

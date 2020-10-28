@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatterInfo } from 'src/app/models/matterInfo';
 import { MatterListService } from '../../services/matterList/matter-list.service';
 
 @Component({
@@ -10,27 +11,29 @@ import { MatterListService } from '../../services/matterList/matter-list.service
 })
 export class MatterAddModalComponent implements OnInit {
   form = this.fb.group({
-    email: [''],
-    id: [''],
-    name: [''],
-    price: [''],
+    email: new FormControl(),
+    id: new FormControl(),
+    name: new FormControl(),
+    price: new FormControl(),
   });
 
   constructor(
     public _dialogRef: MatDialogRef<MatterAddModalComponent>,
     private fb: FormBuilder,
-    userListService: MatterListService
+    private matterListService: MatterListService
   ) {}
 
-  ngOnInit(): void {
-    this.form = this.fb.group({});
-  }
+  ngOnInit(): void {}
 
-  search() {
+  add() {
+    this.matterListService.setAddMatterInfo(
+      new MatterInfo(null, this.form.value.name, this.form.value.price)
+    );
+    this.matterListService.add();
     this.closeModal();
   }
 
-  actionFunction() {
+  search() {
     this.closeModal();
   }
 

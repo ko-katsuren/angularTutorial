@@ -8,28 +8,15 @@
   </div>
   <div class="userlist">
     <table class="table">
-      <th>ID</th>
-      <th>案件名</th>
-      <th>金額</th>
       <tr>
-        <td>1</td>
-        <td>あれあれビル　工事</td>
-        <td>200,000,000</td>
+        <th>ID</th>
+        <th>案件名</th>
+        <th>金額</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>これこれビル　修繕工事</td>
-        <td>300,000,000</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>それそれビル　改修工事</td>
-        <td>41,000,000</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>田中邸　修繕工事</td>
-        <td>2,500,000</td>
+      <tr *ngFor="let user of (matterList || [])">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.price}}</td>
       </tr>
     </table>
   </div>

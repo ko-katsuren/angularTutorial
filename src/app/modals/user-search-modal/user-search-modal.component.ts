@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { inject } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserListService } from '../../services/userList/user-list.service';
 
@@ -11,26 +10,26 @@ import { UserListService } from '../../services/userList/user-list.service';
 })
 export class UserSearchModalComponent implements OnInit {
   form = this.fb.group({
-    id: [''],
-    name: [''],
-    belong: [''],
+    id: new FormControl(),
+    name: new FormControl(),
+    belong: new FormControl(),
   });
 
   constructor(
     public _dialogRef: MatDialogRef<UserSearchModalComponent>,
     private fb: FormBuilder,
-    userListService: UserListService
+    private userListService: UserListService
   ) {}
 
-  ngOnInit(): void {
-    this.form = this.fb.group({});
-  }
+  ngOnInit(): void {}
 
   search() {
-    this.closeModal();
-  }
+    this.userListService.setSearchCondition(
+      this.form.value.id,
+      this.form.value.name,
+      this.form.value.belong
+    );
 
-  actionFunction() {
     this.closeModal();
   }
 

@@ -5,14 +5,13 @@ import { UserInfo } from 'src/app/models/userInfo';
 import { UserListService } from '../../services/userList/user-list.service';
 
 @Component({
-  selector: 'app-user-add-modal',
-  templateUrl: './user-add-modal.component.html',
-  styleUrls: ['./user-add-modal.component.css'],
+  selector: 'app-user-edit-modal',
+  templateUrl: './user-edit-modal.component.html',
+  styleUrls: ['./user-edit-modal.component.css'],
 })
-export class UserAddModalComponent implements OnInit {
+export class UserEditModalComponent implements OnInit {
   form = this.fb.group({
-    email: new FormControl(),
-    password: new FormControl(),
+    id: new FormControl(),
     name: new FormControl(),
     belong: new FormControl(),
     age: new FormControl(),
@@ -20,26 +19,40 @@ export class UserAddModalComponent implements OnInit {
   });
 
   constructor(
-    public _dialogRef: MatDialogRef<UserAddModalComponent>,
+    public _dialogRef: MatDialogRef<UserEditModalComponent>,
     private fb: FormBuilder,
     private userListService: UserListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const editInfo = this.userListService.getEditUserInfo();
+    this.form.setValue({
+      id: editInfo.id,
+      name: editInfo.name,
+      belong: editInfo.belong,
+      age: editInfo.age,
+      address: editInfo.address,
+    });
+  }
 
-  add() {
-    this.userListService.setAddUserInfo(
+  edit() {
+    this.userListService.setEditUserInfo(
       new UserInfo(
-        this.form.value.email,
-        this.form.value.password,
-        null,
+        '',
+        '',
+        this.form.value.id,
         this.form.value.name,
         this.form.value.belong,
         this.form.value.age,
         this.form.value.address
       )
     );
-    this.userListService.add();
+
+    this.userListService.update();
+    this.closeModal();
+  }
+
+  close() {
     this.closeModal();
   }
 

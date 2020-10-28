@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatterListService } from '../../services/matterList/matter-list.service';
 
@@ -10,26 +10,26 @@ import { MatterListService } from '../../services/matterList/matter-list.service
 })
 export class MatterSearchModalComponent implements OnInit {
   form = this.fb.group({
-    id: [''],
-    name: [''],
-    price: [''],
+    id: new FormControl(),
+    name: new FormControl(),
+    price: new FormControl(),
   });
 
   constructor(
     public _dialogRef: MatDialogRef<MatterSearchModalComponent>,
     private fb: FormBuilder,
-    matterListService: MatterListService
+    private matterListService: MatterListService
   ) {}
 
-  ngOnInit(): void {
-    this.form = this.fb.group({});
-  }
+  ngOnInit(): void {}
 
   search() {
-    this.closeModal();
-  }
+    this.matterListService.setSearchCondition(
+      this.form.value.id,
+      this.form.value.name,
+      this.form.value.price
+    );
 
-  actionFunction() {
     this.closeModal();
   }
 

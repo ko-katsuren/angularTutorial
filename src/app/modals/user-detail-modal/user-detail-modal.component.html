@@ -21,13 +21,13 @@
         <td>{{ detailInfo.age }}</td>
       </tr>
       <tr>
-        <th>住職</th>
+        <th>住所</th>
         <td>{{ detailInfo.address }}</td>
       </tr>
     </table>
   </div>
   <footer id="modal-footer">
-    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
-    <button id="modal-action-button" class="btn btn-primary" (click)="search()">編集</button>
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="close()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="edit()">編集</button>
   </footer>
 </div>

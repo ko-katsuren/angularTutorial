@@ -7,6 +7,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class MatterListService {
+  mattersInfo = [];
+  searchCondition = {
+    id: '',
+    name: '',
+    price: null,
+  };
+  addInfo: MatterInfo;
+
+  private apiUrl = 'http://localhost:8000/api/matterinfo';
   private httpOptions: any = {
     // ヘッダ情報
     headers: new HttpHeaders({
@@ -19,44 +28,22 @@ export class MatterListService {
 
   private host: string = 'http://localhost:8000';
 
-  // laravelとのやりとり実装するまではデータで作っておく
-  mattersInfo = [];
-  detailInfo: MatterInfo;
-
-  constructor() {
-    this.clear();
+  constructor(private httpClient: HttpClient) {
     this.setAuthorization('my-auth-token');
   }
 
-  getAll(): Observable<MatterInfo[]> {
-    return of(this.mattersInfo);
+  public getAll(): Observable<any> {
+    return this.httpClient.get(this.apiUrl, this.httpOptions);
   }
 
-  search(): void {}
-
-  add(): void {}
-
-  clear(): void {
-    this.mattersInfo = [
-      new MatterInfo(1, 'どっこいビル建築工事', 100000000),
-      new MatterInfo(2, 'ばっちこいビル改修工事', 300000000),
-      new MatterInfo(3, 'あれあれハウス改修工事', 50000000),
-      new MatterInfo(4, '田中邸改修工事', 250000000),
-      new MatterInfo(5, 'やっさいモッサい工事', 40000000),
-    ];
-  }
-
-  setDetailInfo(id: number): void {
-    this.detailInfo = this.mattersInfo.find((matter) => matter.id === id);
-  }
-
-  getDetailInfo(): Observable<MatterInfo> {
-    return of(this.detailInfo);
-  }
-
-  private errorHandler(err) {
-    console.log('Error occured.', err);
-    return Promise.reject(err.message || err);
+  public getSearchResult(): Observable<any> {
+    return this.httpClient.get(this.apiUrl + '/params', {
+      params: {
+        id: this.searchCondition.id,
+        name: this.searchCondition.name,
+        price: this.searchCondition.price,
+      },
+    });
   }
 
   public setAuthorization(token: string = null): void {
@@ -68,5 +55,39 @@ export class MatterListService {
       'Authorization',
       bearerToken
     );
+  }
+
+  search(): void {}
+
+  add(): void {
+    const body = {
+      name: this.addInfo.name,
+      price: this.addInfo.price,
+    };
+
+    this.httpClient
+      .post(this.apiUrl, 'body=' + JSON.stringify(body), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      })
+      .subscribe(
+        (res) => {
+          console.log('success: ' + JSON.stringify(res));
+        },
+        (error) => {
+          console.log('error: ' + JSON.stringify(error));
+        }
+      );
+  }
+
+  setSearchCondition(id, name, price): void {
+    this.searchCondition.id = id ?? '';
+    this.searchCondition.name = name ?? '';
+    this.searchCondition.price = price ?? '';
+  }
+
+  setAddMatterInfo(info: MatterInfo): void {
+    this.addInfo = info;
   }
 }

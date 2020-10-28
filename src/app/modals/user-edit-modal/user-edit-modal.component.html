@@ -1,17 +1,13 @@
 <div id="modal-content-wrapper">
   <header id="modal-header">
-    <h1 id="modal-title">新規追加</h1>
+    <h1 id="modal-title">編集</h1>
   </header>
   <div class="input-form">
-    <form [formGroup]="form" action="http://localhost:8000/api/userinfo">
+    <form [formGroup]="form">
       <table>
         <tr>
-          <th>メール</th>
-          <td><input type="text" formControlName="email" required></td>
-        </tr>
-        <tr>
-          <th>パスワード</th>
-          <td><input type="text" formControlName="password" required></td>
+          <th>ID</th>
+          <td><input type="text" formControlName="id" readonly></td>
         </tr>
         <tr>
           <th>名前</th>
@@ -23,7 +19,7 @@
         </tr>
         <tr>
           <th>年齢</th>
-          <td><input type="numver" formControlName="age"></td>
+          <td><input type="number" formControlName="age"></td>
         </tr>
         <tr>
           <th>住所</th>
@@ -33,7 +29,7 @@
     </form>
   </div>
   <footer id="modal-footer">
-    <button id="modal-cancel-button" class="btn btn-primary" (click)="closeModal()">閉じる</button>
-    <button id="modal-action-button" class="btn btn-primary" (click)="add()">新規追加</button>
+    <button id="modal-cancel-button" class="btn btn-primary" (click)="close()">閉じる</button>
+    <button id="modal-action-button" class="btn btn-primary" (click)="edit()">編集</button>
   </footer>
 </div>
