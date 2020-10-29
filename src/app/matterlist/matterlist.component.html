@@ -16,7 +16,7 @@
       <tr *ngFor="let user of (matterList || [])">
         <td>{{user.id}}</td>
         <td>{{user.name}}</td>
-        <td>{{user.price}}</td>
+        <td>{{user.price | number : '0.0-0'}}</td>
       </tr>
     </table>
   </div>
